@@ -23,6 +23,6 @@ public class EmailController {
     public String sendEmailWithAttachment() throws MessagingException {
         String attachmentPath = "C:\\Users\\Admin\\Desktop\\vladislav-ociacia-v-51.png";
         emailService.SendEmailWithAttachment("silverbinary47@gmail.com", "Hello", "This is the subject", attachmentPath);
-        return "Sent email with attachment";
+        return "Sent email";
     }
 }
