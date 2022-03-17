@@ -1,8 +1,11 @@
 package com.example.EmailSender.controller;
 
-import com.example.EmailSender.service.EmailService;
+import com.example.EmailSender.configuration.EmailBody;
+import com.example.EmailSender.service.impl.EmailServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.mail.MessagingException;
@@ -11,18 +14,17 @@ import javax.mail.MessagingException;
 public class EmailController {
 
     @Autowired
-    private EmailService emailService;
+    private EmailServiceImpl emailService;
 
-    @GetMapping("/sendEmail")
-    public String sendEmail(){
-        emailService.sendSimpleEmail("silverbinary47@gmail.com", "Hello", "This is the subject");
+
+    @PostMapping("/sendEmail")
+    public String sendEmail(@RequestBody EmailBody emailBody){
+        emailService.sendEmail(emailBody);
         return "Sent";
     }
 
     @GetMapping("/sendEmailWithAttachment")
     public String sendEmailWithAttachment() throws MessagingException {
-        String attachmentPath = "C:\\Users\\Admin\\Desktop\\vladislav-ociacia-v-51.png";
-        emailService.SendEmailWithAttachment("silverbinary47@gmail.com", "Hello", "This is the subject", attachmentPath);
         return "Sent email with attachment";
     }
 }
